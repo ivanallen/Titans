@@ -26,18 +26,18 @@ int main(int argc, char* argv[]) {
     }
     close(tmpfd);
     int src_file_size = lseek(srcfd, 0, SEEK_END);
-	if (-1 == src_file_size) {
-		close(srcfd);
-		perror("get file size!");
-		return -1;
-	}
-	int pos = lseek(srcfd, src_file_size/2,  SEEK_SET);
-	if (-1 == pos) {
-		close(srcfd);
-		perror("set file pos!");
-		return -1;
-	}
-	dstfd = open(argv[2], O_WRONLY|O_CREAT, 0666);
+    if (-1 == src_file_size) {
+        close(srcfd);
+        perror("get file size!");
+        return -1;
+    }
+    int pos = lseek(srcfd, src_file_size/2,  SEEK_SET);
+    if (-1 == pos) {
+        close(srcfd);
+        perror("set file pos!");
+        return -1;
+    }
+    dstfd = open(argv[2], O_WRONLY|O_CREAT, 0666);
     if (-1 == dstfd) {
         printf("[%s] open failed!\n", argv[2]);
         close(srcfd);
