@@ -6,8 +6,8 @@ int dup(int oldfd) {
     PCB* current = get_current();
     for (int i = 0; i < 256; ++i) {
         if (current->filp[i] == NULL) {
-            current->filp[i] = flip[oldfd];
-            flip[i]->f_count++;
+            current->filp[i] = filp[oldfd];
+            filp[i]->f_count++;
             return i;
         }
     }
