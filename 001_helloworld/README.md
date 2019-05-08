@@ -12,5 +12,25 @@
   |-- Makefile
 ```
 
+#### 提示
 
+##### 环境
 
+请先安装 Linux 操作系统，Ubuntu 16 及以上 或者 Centos 7
+
+##### 程序
+
+```c
+// hello_world.c
+#include <stdio.h>
+
+int main() {
+    printf("Hello world\n");
+    return 0;
+}
+```
+
+```
+hello_word:hello_world.c
+    gcc -o $@ $<
+```
