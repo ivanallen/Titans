@@ -14,3 +14,17 @@ https://learngitbranching.js.org/
 - 提交到远程仓库的 dev 分支 git push origin dev:dev
 - 点 pull request 发起 pr
 - 等主仓库管理审核
+
+### 如何保持自己的仓库最新
+
+- 关联主库(如果你关联过了，就不用再次关联了。)
+
+```
+$ git remote add core https://github.com/ivanallen/Titans
+```
+
+- 更新你的代码
+
+```
+$ git pull core master
+```
