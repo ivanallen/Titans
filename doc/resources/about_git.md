@@ -26,5 +26,6 @@ $ git remote add core https://github.com/ivanallen/Titans
 - 更新你的代码
 
 ```
-$ git pull core master
+$ git pull core master  
+$ git push origin master
 ```
