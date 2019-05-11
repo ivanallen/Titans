@@ -82,7 +82,7 @@ allen/
 ├── print_demo.c
 └── write_demo.c
 ```
-
+**文件名上请不要自由发挥，比如认为输出结果没有问题，就随意改动文件名。关于 Makefile 文件，请严格按照我的方式编写，确保可执行文件（二进制文件）的名字为 print_demo 和 write_demo**
 #### 2.1 使用系统调用 write
 
 请使用 write 向屏幕输出 "你的昵称". 这个程序写到 print_demo.c 中。
