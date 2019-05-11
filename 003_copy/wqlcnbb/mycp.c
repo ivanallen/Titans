@@ -21,7 +21,7 @@ int main(int argc, char* argv[]){
         return -1;
     }
     
-	char buf[BUFFERSIZE] = {0};
+    char buf[BUFFERSIZE] = {0};
     int count = 0;
     
     while((count = read(srcfd, buf, BUFFERSIZE)) > 0){
