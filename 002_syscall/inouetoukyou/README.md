@@ -4,7 +4,7 @@
 
 ## Linux 平台 x86 架构的系统调用指令是什么？x64 呢？Arm 架构 Linux 平台的系统调用指令是什么？
 
-答：Linux 平台上，x86 架构系统调用指令是 `int 0x80` 和 `sysenter` ，x64是 `syscall`，arm是 `svc`
+答：Linux 平台上，x86 架构系统调用指令是 `int 0x80` 和 `sysenter` ，x64是 `syscall`，arm是 `svc` (根据相关资料 https://blog.csdn.net/shenhuxi_yu/article/details/81744906 ，以前是 `swi` ，后来被重命名)
 
 ## 你还能列举几个系统调用的例子出来吗？你是从哪里找到它们的？
 
@@ -13,8 +13,9 @@ https://filippo.io/linux-syscall-table/
 
 ## `open` 函数的系统调用号是多少？`read` 呢？你是从哪里找到它们的？
 
-答：`opne` : 2，`read` : 0  
-https://filippo.io/linux-syscall-table/
+答：
+- 64位平台：`open` : 2，`read` : 0 &nbsp; https://filippo.io/linux-syscall-table/
+- 32位平台：`open` : 5，`read` : 3 &nbsp; https://syscalls.kernelgrok.com/
 
 ## `malloc` 是系统调用吗？为什么？
 
@@ -26,4 +27,4 @@ https://filippo.io/linux-syscall-table/
 
 ## 你觉得学习系统编程会对你有何帮助？
 
-答：了解底层
+答：进一步理解平时忽略的函数，如`printf`。

@@ -20,15 +20,12 @@ int main() {
     const char nickname[] = "inouetoukyou\n";
     int size = sizeof(nickname);
 
-#if defined(__i386__)
-#elif defined(__x86_x64__) || defined(__amd64__)
+#if defined(__x86_x64__) || defined(__amd64__)
     __asm__ ("movq $1, %%rax;\n"
             "movq $1, %%rdi;\n"
             "movq %0, %%rsi;\n"
             "movq $13, %%rdx;\n"
             "syscall"::"r"(nickname):"%rax","%rdi","%rsi","%rdx");
-#else
-    printf("Unsupported Platform\n");
 #endif
     return 0;
 }
