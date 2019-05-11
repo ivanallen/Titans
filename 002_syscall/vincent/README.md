@@ -20,7 +20,6 @@
 
 系统调用号可以在`/usr/include/asm/unistd_32.h`和`/usr/include/asm/unistd_64.h`中找到。
 
-
 ## `malloc` 是系统调用吗？为什么？
 
 答：`malloc`不是系统调用， `malloc`是`C`函数库对于系统调用的封装，其内部调用了`brk`或者`sbrk`系统调用。
