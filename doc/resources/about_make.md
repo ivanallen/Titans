@@ -74,10 +74,10 @@ hello_world: hello_world.c
 在 Makefile 中，我们把这种模式
 
 ```
-target:dependency
+target:dependencies
 ```
 
-称为 “目标：依赖”关系。其中 target 是要完成的任务名称，而 dependency 是要完成的任务名称。如果 target 只是单独的表示一个任务名称，而不表示文件，你可以通知 Makefile，它是一个“伪目标”。
+称为 “目标：依赖”关系。其中 target 是要完成的任务名称，而 dependencies 是要完成的任务名称，**你可以同时依赖多个任务**。如果 target 只是单独的表示一个任务名称，而不表示文件，你可以通知 Makefile，它是一个“伪目标”。
 
 比如下面，其中 target 和 hello_world 只是表示任务名称，不代表文件名。
 
