@@ -1,0 +1,7 @@
+all:write_demo print_demo
+
+print_demo:print_demo.c
+	gcc -g -o $@ $<
+
+write_demo:write_demo.c
+	gcc -g -o $@ $<
