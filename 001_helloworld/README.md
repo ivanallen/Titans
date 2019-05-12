@@ -9,9 +9,10 @@
 请以你的名字为文件夹，并在这个文件夹里创建以下文件：
 
 ```c
-|-- {Your name}
-  |-- hello_world.c
-  `-- Makefile
+{Your Name}
+├── Makefile
+├── hello_world
+└── hello_world.c
 ```
 
 **重要**：
