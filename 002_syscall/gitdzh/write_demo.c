@@ -1,5 +1,5 @@
 #include <unistd.h>
-
+#include <stdio.h>
 #define BUFSIZE 1024
 
 int main () {
@@ -11,7 +11,7 @@ int main () {
     __asm__ ("movq $1, %%rax;\n"
             "movq $1, %%rdi;\n"
             "movq %0, %%rsi;\n"
-            "movq $13, %%rdx;\n"
+            "movq $7, %%rdx;\n"
             "syscall"::"r"(buf):"%rax","%rdi","%rsi","%rdx");
 #endif
     

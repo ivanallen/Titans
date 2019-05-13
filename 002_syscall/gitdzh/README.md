@@ -29,6 +29,20 @@
 - x64 架构：open 的系统调用号是 2，read 的系统调用号是 0
 - x86 架构：open 的系统调用号是 5，read 的系统调用号是 3
 
+百度说是这样找到：
+
+查看 32位 的系统调用号
+- cat /usr/include/asm/unistd_32.h
+
+查看64位的系统调用号
+
+- cat /usr/include/asm/unistd_64.h 
+
+我的机器上：
+$ cat /usr/include/asm-generic/unistd.h | grep -nw __NR_open
+>716:#define __NR_open 1024
+>717:__SYSCALL(__NR_open, sys_open)
+
 ## malloc 是系统调用吗？为什么？
 答：不是。它只是封装了系统调用的一个库函数
 - 申请内存小于 128k 时使用 brk 系统调用在堆区分配空间

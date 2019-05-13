@@ -1,4 +1,4 @@
-all:print_demo write_demo.c
+all:print_demo write_demo
 
 print_demo:print_demo.c
 	gcc $^ -o $@
