@@ -21,7 +21,9 @@ https://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system
 | x64架构 | 2      | 0      |
 | x86架构 | 5      | 3      |
 
+x64: https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
 
+x86: https://syscalls.kernelgrok.com/
 
 ## `malloc` 是系统调用吗？为什么？
 
