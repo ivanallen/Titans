@@ -21,7 +21,7 @@ https://blog.csdn.net/shenwanjiang111/article/details/84585400
 
 ##你使用什么命令来查看系统调用的文档？
 
-答：man 2 read 或者是man 3 read。
+答：man 2 read 。
 
 ##你觉得学习系统编程会对你有何帮助？
 
