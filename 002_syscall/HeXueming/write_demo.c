@@ -4,11 +4,12 @@
 int main() {
     char x[] = "HeXueming\n";
 
+
 #if defined(__x86_x64__) || defined(__amd64__)
     __asm__ ("movq $1, %%rax;\n"
             "movq $1, %%rdi;\n"
             "movq %0, %%rsi;\n"
-            "movq $12, %%rdx;\n"
+            "movq $10, %%rdx;\n"
             "syscall"::"r"(x):"%rax","%rdi","%rsi","%rdx");
 #endif
     return 0;
