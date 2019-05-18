@@ -12,8 +12,9 @@
 
 ## `open` 函数的系统调用号是多少？`read` 呢？你是从哪里找到它们的？
 
-答：`open`为5，`read`为3，我是从 http://asm.sourceforge.net/syscall.html 找到它们的。
-
+答：在i386下，`open`为5，`read`为3，我是从 http://asm.sourceforge.net/syscall.html 找到它们的。
+在32位下，`open`为5，`read`为3，我是从 https://blog.csdn.net/qq_29343201/article/details/52209588 找到它们的。
+在64位下，`open`为0，`read`为2，我是从 https://blog.csdn.net/qq_29343201/article/details/52209588 找到它们的。
 
 ## `malloc` 是系统调用吗？为什么？
 
