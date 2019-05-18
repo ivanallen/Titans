@@ -12,15 +12,18 @@
 
 ## `open` 函数的系统调用号是多少？`read` 呢？你是从哪里找到它们的？
 
-答：2， 0； 在适用于x86 64的Linux系统调用表中找到的。
+答：X64位下:"open":2，"read":0； 在适用于x64的Linux系统调用表中找到的 https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
+X86位下:"open":5 , "read":3； 在适用于X86的Linux系统调用表中找到的  https://syscalls.kernelgrok.com/
 
 ## `malloc` 是系统调用吗？为什么？
 
-答：不是。
+答：不是， malloc是C语言中一个封装之后的函数，调用brk或者mmap执行系统命令获取内存
 
 ## 你使用什么命令来查看系统调用的文档？
 
-答：`lsof`
+答：man 
+Linux系统提供了相对比较丰富的帮助手册（man），man是manual的缩写，在日常linux系统管理中经常用到，今天就简单聊聊man。man 本身也提供自己的帮助手册，通过man就可以查看
+https://blog.csdn.net/shuizhizhiyin/article/details/51668962
 
 ## 你觉得学习系统编程会对你有何帮助？
 
