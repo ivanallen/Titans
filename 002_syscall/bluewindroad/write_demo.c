@@ -8,7 +8,7 @@ int main() {
            "movq $13,%%rdx;\n"
            "syscall"::"r"(x):"%rax","%rdi","%rsi","%rdx");
 #else
-    printf"Unsupported Platform\n";
+    printf("Unsupported Platform\n");
 #endif
     return 0;
 }
