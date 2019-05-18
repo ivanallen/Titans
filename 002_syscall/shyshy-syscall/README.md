@@ -12,7 +12,7 @@
     文件：open、write、read；
     通信：socket、pipe;
     进程：fork、wait;
-    线程：pthread_creat
+   del( 线程：linux诞生的时候还没有线程的概念，pthread是一种库函数，不属于系统调用。)
     信号：signal
     百度、书籍查找。
 
