@@ -1,6 +1,6 @@
 #include <unistd.h>
 int main() {
-    char buf[] = "Hello, fuxiangjie!\n";
+    char buf[] = "Hello, fuxiangjie\n";
     write(STDOUT_FILENO, buf, sizeof(buf));
     // arg1: 表示屏幕的代码
     // arg2: 代表将要打印出来的字符串数组
