@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    char x[] = "Hello world\n";
+    char x[] = "hwy1998\n";
 
 #if defined(__x86_x64__) || defined(__amd64__)
     __asm__ ("movq $1, %%rax;\n"
