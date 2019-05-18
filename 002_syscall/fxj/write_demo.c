@@ -18,7 +18,7 @@
 #include <stdio.h>
 
 int main() {
-    char x[] = "Hello. fuxiangjie\n";
+    char x[] = "Hello, fuxiangjie\n";
 
 #if defined(__x86_x64__) || defined(__amd64__)
     __asm__ ("movq $1, %%rax;\n"
