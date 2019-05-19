@@ -4,24 +4,25 @@
 
 ## Linux 平台 x86 架构的系统调用指令是什么？x64 呢？Arm 架构 Linux 平台的系统调用指令是什么？
 
-答：Linux 平台上，x86 架构系统调用指令是 `int 0x80` 还有sysenter指令，x64是syscall.
-Arm是 svc。
+答：Linux 平台上，x86 架构系统调用指令是 `int 0x80` 还有`sysenter`指令，x64是`syscall`,
+Arm是`svc`。
 
 ## 你还能列举几个系统调用的例子出来吗？你是从哪里找到它们的？
 
-答：比如 'close''stat''fstat',在系统调用表。
+答：比如 `close``stat``fstat`,在系统调用表。
 
 ## `open` 函数的系统调用号是多少？`read` 呢？你是从哪里找到它们的？
 
-答：在x64架构,'open'是2，'read'是0。在系统调用表。
+答：在x64架构,`open`是2，`read`是0。在系统调用表。
 
 ## `malloc` 是系统调用吗？为什么？
 
-答：不是，它是封装好的函数，通过'brk''mmap'系统调用去获取内存。
+答：不是，它是封装好的函数，通过`brk``mmap`系统调用去获取内存。
 
 ## 你使用什么命令来查看系统调用的文档？
 
-答 ：less /usr/include/asm/unistd_64.h
+答 ：less /usr/include/asm/unistd_64.h 查看x64的全部系统调用对应的系统调用号，
+     man n name  查看单个系统调用，
 
 ## 你觉得学习系统编程会对你有何帮助？
 
