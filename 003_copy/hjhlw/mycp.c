@@ -38,5 +38,7 @@ int main(int argc,char *argv[])
             break;
         write(dst,buf,strlen(buf));
     }
+    close(src);
+    close(dst);
     return 0;
 }
