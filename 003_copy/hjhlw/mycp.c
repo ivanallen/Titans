@@ -25,6 +25,7 @@ int main(int argc,char *argv[])
     {
         printf("Error : creating the file\n");
         perror("Error ");
+        close(src);
         return -1;
 
     }
