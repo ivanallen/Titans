@@ -21,11 +21,13 @@ int main(int argc, char* argv[])
     if ((fd_out = open(argv[2], O_WRONLY|O_CREAT, 0666)) < 0) {
         perror("open");
         // Linux kernel will automatically closes opened files When the process end.
-        // but it's a good programming practise to close the files explicitly.
+        // but it's a good programming practise to close the files explicitly
         close(fd_in); 
         return -1;
     }
 
+    printf("fd_in = %d, fd_out = %d\n", fd_in, fd_out);
+    
     while ((cnt = read(fd_in, buf, BUFSIZE)) > 0) {
         if(write(fd_out, buf, cnt) != cnt) {
             perror("write");
