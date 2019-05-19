@@ -31,9 +31,12 @@ int main(int argc,char *argv[])
 
     char buf[1024]="";
     int count=0;
-    while(count=read(src,buf,sizeof(buf)))
+    while(1)
     {
-        write(dst,buf,sizeof(buf));
+        count=(dst,buf,sizeof(buf));
+        if(read==-1||read==0)
+            break;
+        write(dst,buf,strlen(buf));
     }
     return 0;
 }
