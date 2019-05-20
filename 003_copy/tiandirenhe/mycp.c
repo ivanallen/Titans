@@ -5,10 +5,10 @@
 #define MAXSIZE 1024
 
 int main(int argc, char *argv[]) {
-	int srcfd = -1;//源文件描述符
-	int dstfd = -1;//目标文件描述符
-	char rwbuf[MAXSIZE] = {0};//读写数据的缓冲区
-	size_t count = -1;//每次从文件中读取到的数据的实际字节数和写入文件的数据的实际字节数
+    int srcfd = -1;//源文件描述符
+    int dstfd = -1;//目标文件描述符
+    char rwbuf[MAXSIZE] = {0};//读写数据的缓冲区
+    size_t count = -1;//每次从文件中读取到的数据的实际字节数和写入文件的数据的实际字节数
 
     srcfd = open(argv[1], O_RDONLY);
     if (-1 == srcfd) {
