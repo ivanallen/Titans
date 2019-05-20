@@ -24,7 +24,6 @@ int main(int argc,char *argv[])
         perror("Error ");
         close(src);
         return -1;
-
     }
 
     char buf[BUFSIZ]="";
@@ -33,11 +32,9 @@ int main(int argc,char *argv[])
         count = read(src,buf,BUFSIZ);
         if(count == 0)
             break;
-        else if(count == -1)
-        {
+        else if (count == -1){
             perror("Error ");
-            break;
-            
+            break;    
         }
         else {
            count = write(dst,buf,count);
