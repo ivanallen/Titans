@@ -29,6 +29,11 @@ int main(int argc, char **argv) {
         int byte_read = read(src_fd, buf, BUFFERSIZE);
         if (byte_read == 0) {
             break;
+        } else if (byte_read < 0) {
+            perror("read");
+            close(src_fd);
+            close(dst_fd);
+            return 1;
         }
         int byte_write = write(dst_fd, buf, byte_read);
         if (byte_write != byte_read) {
