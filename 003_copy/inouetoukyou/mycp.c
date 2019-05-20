@@ -35,6 +35,7 @@ int main(int argc, char **argv) {
             perror("write");
             close(src_fd);
             close(dst_fd);
+            return 1;
         }
     }
     close(src_fd);
