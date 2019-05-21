@@ -31,9 +31,9 @@ int main(int argc, char* argv[]) {
             close(dstfd);
             return -1;
         }
-        if (len < 0)
-            perror("read error");
     }
+    if (len < 0)
+        perror("read error");
     close(srcfd);
     close(dstfd);
     return 0;
