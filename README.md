@@ -1,7 +1,7 @@
 # Titans
 
 [![Build Status](https://travis-ci.com/ivanallen/Titans.svg?branch=master)](https://travis-ci.com/ivanallen/Titans)
-
+[![codebeat badge](https://codebeat.co/badges/1b2ab1e2-fa8e-4bae-b2da-ac5f028b109f)](https://codebeat.co/projects/github-com-ivanallen-titans-master)
 
 欢迎来到 Linux 世界！
 
