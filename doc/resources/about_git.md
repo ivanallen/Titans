@@ -29,8 +29,10 @@ $ git remote add core https://github.com/ivanallen/Titans
 
 ```
 # 从远程主库 core 拉 commit 到你自己的本地 master 分支
+# 确保你已经在master分支，如果没有请：git checkout master
 $ git pull core master
 
 # 把你本地的 master 分支 push 到你自己的远程仓库 master 分支上
+# 确保你已经在master分支，如果没有请：git checkout master
 $ git push origin master
 ```
