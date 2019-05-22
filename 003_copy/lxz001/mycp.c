@@ -12,8 +12,8 @@ int main(int argc, const char * argv[]){
         perror("parameter error!");
         return 1;
     }
-    int f1=open(argv[1], O_RDONLY);
-    int f2=open(argv[2], O_CREAT | O_WRONLY, 0666);
+    int f1 = open(argv[1], O_RDONLY);
+    int f2 = open(argv[2], O_CREAT | O_WRONLY, 0666);
     if (f1 == -1 || f2 == -1){
         perror("open error!");
         return 1;
