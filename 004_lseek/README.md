@@ -167,3 +167,7 @@ world!
 
 答：xxx
 ```
+
+### 5. 扩展阅读
+
+[这里](https://blog.csdn.net/q1007729991/article/details/52564810)提供更多关于文件描述符和 lseek 的资料，可以参考阅读。
