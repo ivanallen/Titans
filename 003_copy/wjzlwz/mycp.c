@@ -4,7 +4,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#define BUFFERSIZE 4096
+#define BUFFERSIZE 1024
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
