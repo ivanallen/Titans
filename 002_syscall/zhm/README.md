@@ -9,15 +9,12 @@
 
 ## 你还能列举几个系统调用的例子出来吗？你是从哪里找到它们的？
 
-答：比如 `open`, `read`, `close`,`write`,`ioctl`。我是从[linux系统调用]（http://www.cnblogs.com/yanlingyin/archive/2012/04/23/2466141.html）找到它们的。
+答：比如 `open`, `read`, `close`,`write`,`ioctl`。http://www.cnblogs.com/yanlingyin/archive/2012/04/23/2466141.html
 
 ## `open` 函数的系统调用号是多少？`read` 呢？你是从哪里找到它们的？
 
-答：在x64架构中open系统调用号是"2"，"read"的系统调用号是"0"。
-
-    在x86架构中open系统调用号是"5"，"read"的系统调用号是"3"。
-
-我是从[linux系统调用号表](https://blog.csdn.net/qq_29343201/article/details/52209588)
+答： 在x64架构中open系统调用号是"2"，"read"的系统调用号是"0"。在x86架构中open系统调用号是"5"，"read"的系统调用号是"3"。
+https://blog.csdn.net/qq_29343201/article/details/52209588
 
 ## `malloc` 是系统调用吗？为什么？
 
