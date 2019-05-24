@@ -34,8 +34,6 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-
-
     close(srcfd); 
     close(dstfd);
     return 0;
