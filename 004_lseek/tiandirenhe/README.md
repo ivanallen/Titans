@@ -8,9 +8,9 @@ int dup(int oldfd) {
     //...
     PCB* current = get_current();// 取到当前进程 PCB
     for (int i = 0; i < 256; ++i) {//遍历filp数组，找到第一个（值最小的）空闲位置，并将filp[oldfd]所指向的文件表赋值给空闲的filp[i]，就是说，filp[i]和filp[oldfd]指向同一个文件。
-        if (filp[i] == NULL) {
-            filp[i] = filp[oldfd]；
-            flip[i]->count++;
+        if (current->filp[i] == NULL) {
+            current->filp[i] = current->filp[oldfd]；
+            current->flip[i]->count++;
             return i;//成功找到则返回索引值，即新的文件描述符的索引值
         }  
     }
