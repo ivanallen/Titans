@@ -31,14 +31,17 @@ int dup(int oldfd) {
 ```    
 int open(const char* filename, int flags, int mode) {
     struce file* f = (struct file*)malloc(sizeof(struct file));
+    if (NULL == f) {
+        return -1;    
+    }
     // 为 f 填充字段
-    f.f_flags  = flags;//假如此时flags为O_APPEND
+    f->f_flags  = flags;//假如此时flags为O_APPEND
     // ...
     // 取到当前进程 PCB
     PCB* current = get_current();
     for (int i = 0; i < 256; ++i) {
-        if (filp[i] == NULL) {
-            filp[i] = f;//其实就是将文件的标志位信息写入文件表中，OPen函数返回其文件描述符索引值，将来在write操作的时候，根据flags标志，设置off_t f_pos; （当前偏移量），到文件的尾部，这样就保证了每次写入数据都是从文件尾部开始。
+        if (current->filp[i] == NULL) {
+            current->filp[i] = f;//其实就是将文件的标志位信息写入文件表中，OPen函数返回其文件描述符索引值，将来在write操作的时候，根据flags标志，设置off_t f_pos; （当前偏移量），到文件的尾部，这样就保证了每次写入数据都是从文件尾部开始。
             return i;
         }
     }
