@@ -57,9 +57,9 @@ int main(int argc, char *argv[]) {
             return -1;
         }
         printf("End of copy file!\n");
-        printf("Source file size : %d\n", srcfilesize);
-        printf("Destination file size : %d\n", dstfilesize);
-        printf("The starting position of the source file read : %d\n", currpos);
+        printf("Source file size : %ld\n", srcfilesize);
+        printf("Destination file size : %ld\n", dstfilesize);
+        printf("The starting position of the source file read : %ld\n", currpos);
 
     } else if (count == -1) {
         perror("Read source file error!\n");
