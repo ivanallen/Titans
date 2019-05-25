@@ -23,20 +23,22 @@ int main(int argc, char **argv) {
     while (1) {
         count = read(src_fd, buf, MAX);
         if (count == 0)
-        	break;
+            break;
         else if (count < 0) {
             perror("read error");
-            break;
+            close(src_fd);
+            close(dst_fd);
+            return -1;
         }
         if (write(dst_fd, buf, count) != count) {
             perror("write error");
-            break;
+            close(src_fd);
+            close(dst_fd);
+            return -1;;
         }
     }
     close(src_fd);
     close(dst_fd);
-    if(count!=0)
-    	return -1;
     return 0;
 }
 

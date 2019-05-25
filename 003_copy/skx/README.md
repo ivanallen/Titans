@@ -6,7 +6,7 @@
 ```c
 perror("/root/noexitfile");
 ```
-可能输出
+可能输出:
 ```c
 /root/noexitfile: No such file or directory
 ```
@@ -36,24 +36,26 @@ bash    4964  skx  255u   CHR  136,0      0t0       3 /dev/pts/0
 
 lsof 是 一个系统级的监控、诊断工具。意思为 List Open Files，lsof -p -p<进程号>：表示列出指定进程号所打开的文件。
 
-输出结果每个分量意义如下：
-COMMAND：进程的名称 PID：进程标识符
-PID：进程标识符
-PPID：父进程标识符（需要指定-R参数）
-USER：进程所有者
-PGID：进程所属组
-FD：文件描述符，应用程序通过文件描述符识别该文件。
-TYPE：文件类型，如DIR（目录）、REG，CHR（字符类型）等
-DEVICE：指定磁盘的名称
-SIZE：文件的大小
-NODE：索引节点（文件在磁盘上的标识）
-NAME：打开文件的确切名称
+#### 输出结果每个分量意义如下：
 
-文件描述符列表：
-cwd：当前工作目录（current work dirctory）
-rtd：root directory;
-txt：程序代码
-mem：内存映射文件（memory-mapped file）
-0：标准输出（）
-1：标准输入
-2：标准错误
+- COMMAND：进程的名称 PID：进程标识符
+- PID：进程标识符
+- PPID：父进程标识符（需要指定-R参数）
+- USER：进程所有者
+- PGID：进程所属组
+- FD：文件描述符，应用程序通过文件描述符识别该文件。
+- TYPE：文件类型，如DIR（目录）、REG，CHR（字符类型）等
+- DEVICE：指定磁盘的名称
+- SIZE：文件的大小
+- NODE：索引节点（文件在磁盘上的标识）
+- NAME：打开文件的确切名称
+
+#### 文件描述符列表：
+
+- cwd：当前工作目录（current work dirctory）
+- rtd：root directory;
+- txt：程序代码
+- mem：内存映射文件（memory-mapped file）
+- 0：标准输出（）
+- 1：标准输入
+- 2：标准错误
