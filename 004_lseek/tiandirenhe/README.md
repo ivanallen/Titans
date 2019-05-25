@@ -1,31 +1,9 @@
 ### 4.2 问答
 
-请你创建一个 README.md 文件放到你的目录，复制以下内容进去，并回答。（当然你的回答不能与我的示例回答相同。）
-
-```
 ### 1. 写出 `dup` 函数的伪代码。
 
 {{在这里写你的代码}}
-```c
-int dup2(int oldfd, int newfd) {
-    // ...
-    close(newfd);
-    flip[newfd] = flip[oldfd];
-    flip[newfd]->count++;
-    //...
-    return 0;
-}
-
- 
-    PCB* current = get_current();
-    for (int i = 0; i < 256; ++i) {
-        if (filp[i] == NULL) {
-            filp[i] = f;
-            return i;
-        }
-    }
-    
-    
+```
 int dup(int oldfd) {
     //...
     PCB* current = get_current();// 取到当前进程 PCB
@@ -64,9 +42,3 @@ int open(const char* filename, int flags, int mode) {
     }
     return -1;
 } 
-
-```
-
-### 5. 扩展阅读
-
-[这里](https://blog.csdn.net/q1007729991/article/details/52564810)提供更多关于文件描述符和 lseek 的资料，可以参考阅读。
