@@ -39,8 +39,8 @@ int open(const char* filename, int flags, int mode) {
     // 取到当前进程 PCB
     PCB* current = get_current();
     for (int i = 0; i < 256; ++i) {
-        if (filp[i] == NULL) {
-            filp[i] = f;
+        if (current->filp[i] == NULL) {
+            current->filp[i] = f;
             return i;
         }
     }
