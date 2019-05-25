@@ -10,7 +10,9 @@ int dup(int oldfd) {
     for (int i = 0; i < 256; ++i) {//遍历filp数组，找到第一个（值最小的）空闲位置，并将filp[oldfd]所指向的文件表赋值给空闲的filp[i]，就是说，filp[i]和filp[oldfd]指向同一个文件。
         if (filp[i] == NULL) {
             filp[i] = filp[oldfd]；
+            flip[i]->count++;
             return i;//成功找到则返回索引值，即新的文件描述符的索引值
+        }  
     }
     return -1;//失败则返回-1              
 }
@@ -26,7 +28,7 @@ int dup(int oldfd) {
     在文件表项中的当前文件偏移量首先被置为i节点表项中的文件长度。这就使得每次写的数据都添加到文件的当前尾端处。
     使用O_APPEND属性后，这个效果只有在你每一次使用write函数时，才会生效，即当你每次调用write时，OS就会把文件的读写位置设置成文件尾部；而你之前做的所有工作，包括你调用lseek函数来修改文件读写位置，到了你每一次调用write函数时，
     操作系统还是会把读写位置设置成文件尾部！即所有的写操作都只能在文件尾部进行！
-    
+```    
 int open(const char* filename, int flags, int mode) {
     struce file* f = (struct file*)malloc(sizeof(struct file));
     // 为 f 填充字段
@@ -41,4 +43,5 @@ int open(const char* filename, int flags, int mode) {
         }
     }
     return -1;
-} 
+}
+``` 
