@@ -21,7 +21,7 @@ int main(int argc, char *filename[]) {
     char buffer[4096] = {0};
     int length = 0;
     while ((length = read(becopy, buffer, 4096))>0) {
-        if (write(copyto, buffer,length) != length) {
+        if (write(copyto, buffer, length) != length) {
             perror("write error");
             return -1;
         }
