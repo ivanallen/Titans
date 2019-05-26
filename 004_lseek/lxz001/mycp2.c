@@ -24,11 +24,11 @@ int main(int argc, const char * argv[]){
         perror("lseek error!");
         return 1;
     }
-    const int BufSize = 1024;
-    char buf[BufSize + 1];
+    const int BUF_SIZE = 1024;
+    char buf[BUF_SIZE];
     int read_size;
     do {
-        read_size = read(f1, buf, BufSize);
+        read_size = read(f1, buf, BUF_SIZE);
         if (read_size < 0){
             perror("read error!");
             return 1; 
