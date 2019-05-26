@@ -29,15 +29,15 @@ int main(int argc, char* argv[]){
     }
 
     int count;
-    while ((count = read(srcfd, buf, BUFFERSIZE))> 0){
+    while ((count = read(srcfd, buf, BUFFERSIZE)) > 0){
         if (write(dstfd, buf, count) != count){
             perror("write error");
-             close(srcfd);
-             close(dstfd);
+            close(srcfd);
+            close(dstfd);
             return -1;
         }
     }
-    if (count <0){
+    if (count < 0){
         perror("write error");
         return -1;
     }
