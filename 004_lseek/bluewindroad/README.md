@@ -1,5 +1,5 @@
 ### 1. 写出 `dup` 函数的伪代码。
-···
+```
 int dup2(int oldfd) {
     PCB* current = get_current();
     for (int i = 0;i < 256; ++i) {
@@ -10,7 +10,7 @@ int dup2(int oldfd) {
     }
     return i;
 }
-···
+```
 ### 2. 学习本文知识点对你来说有什么困难？
 
 答：刚开始时没有意识到进程与本章任务的关系，走了一些弯路。
