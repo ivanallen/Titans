@@ -1,14 +1,14 @@
 ### 1. 写出 `dup` 函数的伪代码。
 ```
 int dup2(int oldfd) {
-    PCB* current = get_current();
+    PCB* current = get_current();//获取当前进程
     for (int i = 0;i < 256; ++i) {
-    if (flip[i] == null) {
-        flip[i] = flip[oldfd];
-        flip[i]->count++;
-        break;
+    if (flip[i] == null) {//找到空的flip，让它指向所需文件
+        flip[i] = flip[oldfd];//这时flip[i]和flip[oldfd]都指向所需文件
+        flip[i]->count++;//指向所需文件的引用增加了
+        return i;//返回i
     }
-    return i;
+    return -1;
 }
 ```
 ### 2. 学习本文知识点对你来说有什么困难？
