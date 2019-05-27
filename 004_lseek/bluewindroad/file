@@ -1,0 +1,108 @@
+唯一你可能比较费解的是 `f_count`，它表示当前这个 `struct file` 同时有几个 fd 指向它。比如 `filp[5]` 和 `filp[10]` 这两个元素的值是一样的，也就是它们指向同一个 `struct file` 对象。有人会问，这怎么可能，`open` 函数不是每次都会分配一个新的 `fd` 吗？是的，但是 Linux 中存在一些函数，可以复制 fd，比如 `dup`，`dup2` 函数。一个 `dup2` 函数可能实现如下：
+
+```c
+int dup2(int oldfd, int newfd) {
+    // ...
+    close(newfd);
+    flip[newfd] = flip[oldfd];
+    flip[newfd]->count++;
+    //...
+    return 0;
+}
+```
+
+看明白了吧？这就是 dup2 函数所做的事情，同样还有 `dup` 函数，它的实现是怎样的呢？这里把它留做习题。
+
+### 2. 文件偏移量
+
+既然 `fd` 是 `flip` 数组的索引号，那一切就好办了，比如 `read` 函数，它可以写成这样：
+
+```c
+int read(fd, char* buf, int size) {
+    PCB* current = get_current();
+    struct file* f = current->filp[fd];
+    off_t pos = f->f_pos;
+
+    // 接下来，可以根据 f->f_inode 找到磁盘上的数据，向后数 pos 个字节，开始读取数据
+    char* data = get_data(f->f_inode);
+    int length = get_length(f->f_inode);
+    int left = length - pos; // 还剩余多少字节
+    int read_size = min(size, left);
+    memcpy(buf, data + pos, read_size);
+    f->f_pos += read_size; // 更新 f_pos
+    return min(size, left);
+}
+```
+
+上面是我写的一个非常非常粗糙的版本，但足以描述 `read` 读取文件的原理，我希望你看到的是 `read` 如何使用 `f_pos` 的。
+
+有没有一种办法，直接更改这个 f_pos 呢？Linux 提供了另一个系统调用 lseek 就能做到。
+
+### 3. lseek
+
+```c
+off_t lseek(int fd, off_t offset, int whence);
+```
+
+上面是 `lseek` 的函数原型，它的目的就是修改 `f_pos` 的值。
+
+当用 `open` 函数打开一个文件的时候，该偏移量 `f_pos` 被默认指定为 0。
+
+- 如果 `whence` 等于 `SEEK_SET`，则 `f_pos = offset`（`offset` 只能是正数）
+- 如果 `whence` 等于 `SEEK_CUR`, 则 `f_pos = f_pos + offset`（`offset` 可正可负）
+- 如果 `whence` 等于 `SEEK_END`，则 `f_pos = 文件长度 + offset` （`offset` 可正可负）
+
+返回值的含义，请你自己查阅文档，了解其含义。
+
+### 4. 任务
+
+最终你的文件夹内容如下：
+
+```
+{{YOUR_NAME}}
+├── README.md
+├── Makefile
+└── mycp2.c
+```
+
+#### 4.1 编程
+
+**在这个任务里，你不必再写自己的 Makefile，把 `allen/Makefile` 复制到你的文件夹下面就行了。** 但是请你不要复制我写的 mycp2.c 文件。
+
+- 编写程序 `mycp2`，这个程序只 copy 文件的后一半内容。
+
+例如：原始文件 srcfile 内容为
+
+```
+Hello world!
+```
+
+执行 `./mycp2 srcfile file` 后，file 的内容为：
+
+```
+world!
+```
+
+**注意：你 copy 出来的 file 文件大小，一定刚好为 srcfile 大小的一半，或者比 srcfile 的一半多出一个字节（如果 srcfile 是奇数个字节。）**
+
+### 4.2 问答
+
+请你创建一个 README.md 文件放到你的目录，复制以下内容进去，并回答。（当然你的回答不能与我的示例回答相同。）
+
+```
+### 1. 写出 `dup` 函数的伪代码。
+
+{{在这里写你的代码}}
+
+### 2. 学习本文知识点对你来说有什么困难？
+
+答：xxx
+
+### 3. 你能理解 `open` 函数 flags 标志位 `O_APPEND` 是如何实现的吗？
+
+答：xxx
+```
+
+### 5. 扩展阅读
+
+[这里](https://blog.csdn.net/q1007729991/article/details/52564810)提供更多关于文件描述符和 lseek 的资料，可以参考阅读。
