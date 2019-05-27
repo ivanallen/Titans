@@ -4,9 +4,9 @@ int dup2(int oldfd) {
     PCB* current = get_current();
     for (int i = 0;i < 256; ++i) {
     if (flip[i] == null) {
-    flip[i] = flip[oldfd];
-    flip[i]->count++;
-    break;
+        flip[i] = flip[oldfd];
+        flip[i]->count++;
+        break;
     }
     return i;
 }
