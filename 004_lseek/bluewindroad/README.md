@@ -3,9 +3,9 @@
 int dup2(int oldfd) {
     PCB* current = get_current();//获取当前进程
     for (int i = 0;i < 256; ++i) {
-    if (flip[i] == null) {//找到空的flip，让它指向所需文件
-        flip[i] = flip[oldfd];//这时flip[i]和flip[oldfd]都指向所需文件
-        flip[i]->count++;//指向所需文件的引用增加了
+    if (current->flip[i] == null) {//找到空的flip，让它指向所需文件
+        current->flip[i] = current->flip[oldfd];//这时flip[i]和flip[oldfd]都指向所需文件
+        current->flip[i]->count++;//指向所需文件的引用增加了
         return i;//返回i
     }
     return -1;
