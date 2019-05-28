@@ -5,8 +5,7 @@
 #include<fcntl.h>
 #include<string.h>
 
-int main(int argc,char *argv[])
-{
+int main(int argc,char *argv[]) {
     if (argc != 3) {
         printf("your parameters are incorrect\n");
         return -1;
