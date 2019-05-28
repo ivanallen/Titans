@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
             break;    
         }
         else {
-           count = write(dst,buf,count);
+           count = write(dst, buf, count);
            if (count == -1) {
                perror("Error ");
                break;
