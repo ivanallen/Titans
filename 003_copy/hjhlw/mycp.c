@@ -11,13 +11,13 @@ int main(int argc,char *argv[]) {
         return -1;
     }
 
-    int src=open(argv[1],O_RDONLY);
+    int src=open(argv[1], O_RDONLY);
     if (src == -1) {
         printf("Error : reading the file\n");
         perror("Error ");
         return -1;
     }
-    int dst = open(argv[2],O_WRONLY|O_CREAT,0666);
+    int dst = open(argv[2], O_WRONLY|O_CREAT, 0666);
     if (dst == -1) {
         printf("Error : creating the file\n");
         perror("Error ");
@@ -28,7 +28,7 @@ int main(int argc,char *argv[]) {
     char buf[BUFSIZ] = "";
     int count = 0;
     while (1) {
-        count = read(src,buf,BUFSIZ);
+        count = read(src, buf, BUFSIZ);
         if(count == 0) break;
         else if (count == -1) {
             perror("Error ");
