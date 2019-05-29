@@ -6,7 +6,7 @@ int dup(int oldfd) {
     for (i = 0; i < 256; ++i) {
         if (flip[i] == NULL) {
             flip[i] = flip[oldfd];
-            ++flip[i] -> count;
+            ++flip[i]->count;
             return i;
         }
     }
