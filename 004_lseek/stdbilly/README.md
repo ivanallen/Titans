@@ -2,7 +2,7 @@
 
 ```c
 int dup(int oldfd) {
-	PCB* current = get_current(); 
+    PCB* current = get_current(); 
     for (int i = 0; i < 256; ++i) {
         if(current->flip[i] == null) {
             current->flip[i] = current->flip[oldfd];
@@ -24,4 +24,4 @@ int dup(int oldfd) {
 
 The file is opened in append mode.  Before each `write(2)`, the file offset is positioned at the end of the file, as if with `lseek(2)`.  The modification of the file offset and the write operation are performed as a single atomic step.
 
-通过`lseek`函数重定位`offset`至文件末尾, 通过`write`函数在文件末尾写入
+就像使用`lseek`函数一样将`offset`设置在文件末尾, 实际执行 `write` 函数的时候，都会检查 `O_APPEND` 标记,通过`write`函数在文件末尾写入
