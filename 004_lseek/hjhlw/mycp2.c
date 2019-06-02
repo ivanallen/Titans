@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        perror("few parameters");
+        printf("few parameters\n");
         return -1;
     }
     int src = open(argv[1], O_RDONLY);
