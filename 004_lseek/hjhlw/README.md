@@ -1,15 +1,15 @@
 ### 1. 写出 `dup` 函数的伪代码。
 
-int dup(int oldfd) {
-    PCB *current = get_current();
-    for (int i = 0; i < 256; ++i) {
-        if (current->filp[i] == NULL) {
-            current->filp[i] = current->filp[oldfd];
-            return i;
+    int dup(int oldfd) {
+        PCB *current = get_current();
+        for (int i = 0; i < 256; ++i) {
+            if (current->filp[i] == NULL) {
+                current->filp[i] = current->filp[oldfd];
+                return i;
+            }
         }
+        return -1;
     }
-    return -1;
-}
 
 ### 2. 学习本文知识点对你来说有什么困难？
 
