@@ -4,7 +4,7 @@ dup 函数用来复制一个文件的描述符。
 失败：均返回 -1，并设置 errno
 
 一个文件文件只有一个 v 结点和 i 结点，不同进程打开不同或者相同的文件，都会产生一个文件表，dup 函数会使得在同一个进程中有两个 fd 指向同一个文件表。
-```c
+```c++
 int dup(int oldfd) {
     //...
     PCB* current = get_current();			//找当前进程的进程控制块结构体
@@ -27,14 +27,13 @@ int dup(int oldfd) {
 答：O_APPEND 的含义是在每次写之前，都将标志位移动到文件的末端。可以理解为先打开文件，在将当前位置移动到文件的末尾。移动到末端，写数据这两步是一个原子操作，不可拆分。也就是说，当在O_APPEND 打开后，然后用 lseek 移动到其他的位置，然后再用 write 写，还是写在末端 ，中间的 lseek 是无效的。
 例如：
 
-```c
-int fd = open("test.txt",RDWR | O_APPEND);
-    lseek(fd,10,SEEK_SET);
-    if(write(fd,buffer,strlen(buffer)) !=strlen(buffer))
-    {
+```c++
+int fd = open("test.txt", RDWR | O_APPEND);
+    lseek(fd, 10, SEEK_SET);
+    if (write(fd, buffer, strlen(buffer)) != strlen(buffer)) {
           perror("write error");
           exit(1);
     }
-     read(fd,buffer,20);
+     read(fd, buffer, 20);
 ```
 这里 lseek 是没有用的，write 的写入是到文件末端的。在 write 写完后，标志位是在文件末端的， 这里的 read 不会读出任何数据，因为在文件末尾，以前的 lseek 没有起作用，除非在读之前再 lseek 一次。

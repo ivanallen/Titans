@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
         perror("open source file");
         return -1;
     }
-    int desfd = open(argv[2], O_CREAT | O_WRONLY,0666);
+    int desfd = open(argv[2], O_CREAT | O_WRONLY, 0666);
     if (desfd == -1) {
         perror("open destination file");
         return -1;
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     
     char buf[BUFSIZE] = {0};
     int len = 0;
-    while ((len = read(sourfd, buf, BUFSIZE))>0) {
+    while ((len = read(sourfd, buf, BUFSIZE)) > 0) {
         if (write(desfd, buf, len) != len) {
             perror("write error");
             return -1;
