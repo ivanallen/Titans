@@ -8,8 +8,8 @@
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
-       printf("usage:\n mycp2 sour des\n");
-       return -1;
+        printf("usage:\n mycp2 sour des\n");
+        return -1;
     }
     int sourfd = open(argv[1], O_RDONLY);
     if (sourfd == -1) {

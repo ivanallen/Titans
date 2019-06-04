@@ -9,9 +9,9 @@ int dup(int oldfd) {
     //...
     PCB* current = get_current();             //找当前进程的进程控制块结构体
     for (int i = 0; i < 256; ++i) {
-        if (current -> filp[i] == NULL) {     //从当前进程的 filp 数组中找一个描述符最小的空闲位置
-            current -> filp[i] = filp[oldfd]；//令 filp[i] 指向 filp[oldfd]
-            current -> flip[i] -> count++;    //引用计数加 1
+        if (current->filp[i] == NULL) {       //从当前进程的 filp 数组中找一个描述符最小的空闲位置
+            current->filp[i] = filp[oldfd]；  //令 filp[i] 指向 filp[oldfd]
+            current->flip[i]->count++;        //引用计数加 1
             return i;                         //返回当前描述符
         }  
     }
@@ -34,6 +34,6 @@ int fd = open("test.txt", RDWR | O_APPEND);
           perror("write error");
           exit(1);
     }
-     read(fd, buffer, 20);
+    read(fd, buffer, 20);
 ```
 这里 lseek 是没有用的，write 的写入是到文件末端的。在 write 写完后，标志位是在文件末端的， 这里的 read 不会读出任何数据，因为在文件末尾，以前的 lseek 没有起作用，除非在读之前再 lseek 一次。
