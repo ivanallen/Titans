@@ -10,7 +10,7 @@ int dup(int oldfd) {
     PCB* current = get_current();             //找当前进程的进程控制块结构体
     for (int i = 0; i < 256; ++i) {
         if (current->filp[i] == NULL) {       //从当前进程的 filp 数组中找一个描述符最小的空闲位置
-            current->filp[i] = filp[oldfd]；  //令 filp[i] 指向 filp[oldfd]
+            current->filp[i] = current->filp[oldfd]；  //令 filp[i] 指向 filp[oldfd]
             current->flip[i]->count++;        //引用计数加 1
             return i;                         //返回当前描述符
         }  
