@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     int dstfd = open(argv[2], O_CREAT | O_WRONLY, 0666);
     if (dstfd == -1) {
         close(srcfd);
-		perror("open");
+        perror("open");
         return -1;
     }
 
