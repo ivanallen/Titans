@@ -8,6 +8,7 @@ int main(int argc, char* argv[]) {
         printf("arg error!\n");
         return -1;
     }
+    
     int srcfd = open(argv[1], O_RDONLY);
     if (srcfd == -1) {
         perror("open");
