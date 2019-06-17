@@ -31,17 +31,17 @@ int main(int argc, char* argv[]) {
     while((len = read(srcfd, buf, size - midpos)) > 0) {
         if (write(dstfd, buf, len) != len) {
             perror("write error");
-			free(buf);
+            free(buf);
             return -1;
         }   
     }
     if (len < 0) {
         perror("read error");
-		free(buf);
+        free(buf);
         return -1;
     }
 
-	free(buf);
+    free(buf);
     close(srcfd);
     close(dstfd);
     return 0;
