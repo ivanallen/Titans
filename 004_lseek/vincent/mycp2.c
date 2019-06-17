@@ -23,10 +23,10 @@ int main(int argc, char* argv[]) {
 
     int size = lseek(srcfd, 0, SEEK_END);
     int midpos = size / 2;
-   	lseek(srcfd, midpos, SEEK_SET);
+    lseek(srcfd, midpos, SEEK_SET);
 
-	int len;
-	char * buf = (char*)malloc(size - midpos);
+    int len;
+    char * buf = (char*)malloc(size - midpos);
 
     while((len = read(srcfd, buf, size - midpos)) > 0) {
         if (write(dstfd, buf, len) != len) {
@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 		free(buf);
         return -1;
     }
-	
+
 	free(buf);
     close(srcfd);
     close(dstfd);
