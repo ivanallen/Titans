@@ -5,7 +5,7 @@ int dup(int oldfd) {
     for (int i = 0; i < 256; ++i) {
     if (current->flip[i] == null) {//找到空的flip
         current->flip[i] = current->flip[oldfd];//让flip[i]和flip[oldfd]都指向文件
-        current->flip[i]->count++;//指向文件的引用增加了
+        current->flip[i]->count++;//指向文件的引用增加
         return i;
     }
     return -1;
