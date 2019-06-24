@@ -1,4 +1,3 @@
-
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -6,15 +5,6 @@
 #include <stdio.h>
 
 #define BUFFERSIZE 4096
-
-int file_size (char* filename) {
-
-    struct stat statbuf;
-    stat(filename, &statbuf);
-    int size = statbuf.st_size;
- 
-    return size;
-}
 
 int main (int argc, char* argv[]) {
 	if (argc != 3) {
@@ -27,7 +17,7 @@ int main (int argc, char* argv[]) {
         return 1;
     }
 
-    int dstfd = open(argv[2], O_CREAT |  O_WRONLY, 0666);
+    int dstfd = open(argv[2], O_CREAT |  O_WRONLY | O_TRUNC);
     if (dstfd == -1) {
         perror("open");
         return 1;
@@ -36,7 +26,7 @@ int main (int argc, char* argv[]) {
     int len = 0;
     char buffer[BUFFERSIZE] = {0};
 
-    int fileSize = file_size("test.txt");//test.txt是复制的源文件
+    int fileSize = lseek(srcfd, 0, SEEK_END);
     off_t curr = lseek(srcfd, fileSize>>1, SEEK_SET);
 
     while ((len = read(srcfd, buffer, BUFFERSIZE)) > 0) {
@@ -47,6 +37,9 @@ int main (int argc, char* argv[]) {
     }
     if (len < 0) {
         perror("read error");
+        close(srcfd);
+        close(dstfd);
+        return 1;
     }
     close(srcfd);
     close(dstfd);
