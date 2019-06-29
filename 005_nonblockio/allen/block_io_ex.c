@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <assert.h>
 
-#define MAX_TTY 10
+#define MAX_FILE 10
 
 char* upper(char* str, int n) {
     assert(str != NULL);
@@ -23,10 +23,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    int fd[MAX_TTY];
-    for (int i = 0; i < MAX_TTY; ++i) fd[i] = -1;
+    int fd[MAX_FILE];
+    for (int i = 0; i < MAX_FILE; ++i) fd[i] = -1;
 
-    for (int i = 0; i < MAX_TTY && i < argc - 1; ++i) {
+    for (int i = 0; i < MAX_FILE && i < argc - 1; ++i) {
         fd[i] = open(argv[i+1], O_RDONLY);
         if (fd[i] < 0) {
             perror("open");
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 
     while (1) {
         int stop = 1;
-        for (int i = 0; i < MAX_TTY; ++i) {
+        for (int i = 0; i < MAX_FILE; ++i) {
             if (fd[i] == -1) continue;
             stop = 0;
             len = read(fd[i], buf, 64);
