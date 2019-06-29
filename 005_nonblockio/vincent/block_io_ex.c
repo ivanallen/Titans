@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
     if (argc < 2 || argc - 1 > MAX_OPEN_FILE) {
         return -1;
     }
+    
     int i, opening_file_cnts = 0, fd[MAX_OPEN_FILE];
     for (i = 0; i < argc - 1; i++) {
         fd[i] = open(argv[i + 1], O_RDONLY);
@@ -51,6 +52,7 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+
 char *upper(char* str, int len)
 {
     if (str == NULL) {
