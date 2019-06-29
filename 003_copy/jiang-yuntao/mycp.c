@@ -5,7 +5,7 @@
 #include<sys/stat.h>
 #define MAXSIZE 4096
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]) {
     int src = open(argv[1], O_RDONLY);
     if (src == -1) {
     printf("Error : reading the file\n");
@@ -21,8 +21,8 @@ int main(int argc, char* argv[]){
 }
     char buffer[MAXSIZE] = "";
     int len = 0;
-    while ((len = read(src, buffer, MAXSIZE)) > 0){
-    if (write(dst, buffer, len) != len){
+    while ((len = read(src, buffer, MAXSIZE)) > 0) {
+    if (write(dst, buffer, len) != len) {
         perror("Error copying file!\n");
         break;
     }
