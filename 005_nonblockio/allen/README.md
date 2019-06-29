@@ -22,7 +22,7 @@ hello
 
 最终你的文件夹是这样的。
 
-```
+```shell
 allen/
 ├── Makefile
 ├── README.md
@@ -34,13 +34,13 @@ allen/
 
 在 `allen` 文件夹下，有一个程序 `block_io.c`，请你使用 `make` 程序编译，生成程序 `block_io`。该程序可以打开一个文件或者设备，读取其中的数据，并将所有的小写字母转换成大写字母，输出到你的屏幕。例如：
 
-```
+```shell
 $ ./block_io README.md
 ```
 
 接下来，你可以打开你的终端设备，从中读取数据
 
-```
+```shell
 $ ./block_io /dev/tty
 ```
 
@@ -58,13 +58,13 @@ $ ./block_io /dev/tty
 
 在 b 中输入以下命令：
 
-```
+```shell
 $ cat > allen.fifo
 ```
 
 在 a 中输入以下命令：
 
-```
+```shell
 $ ./block_io allen.fifo
 ```
 
@@ -77,13 +77,13 @@ $ ./block_io allen.fifo
 
 你的新程序命令为 `block_io_ex.c`。在你写这个程序之前，请先运行我写好的 `block_io_ex`，在 a 中输入以下命令：
 
-```
+```shell
 $ ./block_io_ex /dev/tty allen.fifo
 ```
 
 在 b 中输入：
 
-```
+```shell
 $ cat > allen.fifo
 ```
 
@@ -111,7 +111,7 @@ while(1) {
 
 所以，咱们这里如果能让 `read` 不阻塞，那该多好。如果把把上面的代码改成这样：
 
-```
+```c
 while(1) {
   非阻塞 read(设备1);
   if (设备1有数据){
@@ -148,13 +148,14 @@ int set_nonblock(int fd) {
 
 这两种方案都是可行的，但是 Linux 选择了前者。或者说，标准委员会规定了，使用前面的用法。这意味着，使用前者方案也许会存在更多的优势。
 
-`read` 系统调用一旦检查到资源还未准备好，同时当前 fd 被打上了 O_NONBLOCK 标记，就会立即返回，而不是把进程转换成阻塞态。同时，返回 -1，errno 设置成 EAGAIN 或者 EWOULDBLOCK。(EWOULDBLOCK 的值可能和 EAGAIN 是一样的，也可能是不一样的，因此你最好同时观察这两个值)。
+`read` 系统调用一旦检查到资源还未准备好，同时当前 fd 被打上了 `O_NONBLOCK` 标记，就会立即返回，而不是把进程转换成阻塞态。同时，返回 -1，`errno` 设置成 `EAGAIN` 或者 `EWOULDBLOCK`。(`EWOULDBLOCK` 的值可能和 `EAGAIN` 是一样的，也可能是不一样的，因此你最好同时观察这两个值)。
 
 
 ### 2.4 问答
 
 - block_io 为什么会阻塞？
 - block_io_ex 为什么无法并发处理两个不同设备来的数据?
+- 你觉得非阻塞 IO 解决了什么问题？
 - nonblock_io 会有什么问题？
 
 请将题目和答案，保存在 README.md 中。
