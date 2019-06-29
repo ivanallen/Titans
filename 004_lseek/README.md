@@ -33,7 +33,7 @@ struct PCB {
 
 ```c
 int open(const char* filename, int flags, int mode) {
-    struce file* f = (struct file*)malloc(sizeof(struct file));
+    struct file* f = (struct file*)malloc(sizeof(struct file));
     // 为 f 填充字段
     // ...
     // 取到当前进程 PCB

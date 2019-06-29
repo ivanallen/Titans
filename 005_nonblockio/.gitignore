@@ -1,0 +1,7 @@
+block_io
+block_io_ex
+nonblock_io
+*.swp
+*.swo
+*.swn
+*.un~
