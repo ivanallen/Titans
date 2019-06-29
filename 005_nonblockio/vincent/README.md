@@ -41,6 +41,3 @@ int fcntl(int fd, int cmd, ... /* int arg */);
     ```
 
     因此，运行程序应该输入`./block_io_ex /dev/pts/0 allen.fifo`
-
-
-
