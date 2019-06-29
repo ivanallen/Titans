@@ -1,3 +1,6 @@
+#define _POSIX_C_SOURCE 201906L
+#define _BSD_SOURCE
+
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
