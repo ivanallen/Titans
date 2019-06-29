@@ -52,9 +52,7 @@ int main(int argc, char* argv[]) {
             stop = 0;
             len = read(fd[i], buf, 64);
             if (len < 0) {
-                if (errno == EAGAIN) {
-                    usleep(60*1000);
-                }
+                if (errno == EAGAIN) usleep(60*1000);
                 continue;
             }
 
