@@ -1,11 +1,11 @@
 all: mycp
-    ./mycp ../README.md file
+	./mycp ../README.md file
 
 mycp: mycp.c
-    gcc -o $@ $<
+	gcc -o $@ $<
 
 clean:
-    rm -rf mycp
+	rm -rf mycp
 
 .PHONY:all
 .PHONY:clean
