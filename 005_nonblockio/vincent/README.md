@@ -29,15 +29,3 @@ int fcntl(int fd, int cmd, ... /* int arg */);
 ### 5.nonblock_io 会有什么问题？
 
 如果所有文件都一直没有数据的话，会空耗CPU。在我们的程序中使用了`sleep`函数让出CPU给其他进程，但是这样会造成数据处理不及时的问题，影响效率。这个问题可以通过使用`select`、`poll`或`epoll`等IO多路复用来解决。
-
-### 6.学习本节需要注意的问题
-
-1. 本节实验需要在一个非共享文件夹下面操作。如果使用虚拟机共享文件夹，`mkfifo`命令会执行不成功，不能创建命名管道。
-
-2. 如果使用`xshell`等工具连接`linux`系统， 在执行`./block_io_ex /dev/tty allen.fifo`时，需要将`/dev/tty`替换成自己的设备。可以使用`who am i`命令查看当前设备。比如在我的机器上执行`who am i`，结果是
-
-    ```shell
-    root     pts/0        2019-06-30 01:02 (192.168.48.1)
-    ```
-
-    因此，运行程序应该输入`./block_io_ex /dev/pts/0 allen.fifo`
