@@ -5,20 +5,53 @@
 ### 3. 你觉得掌握文件 IO 还能做些什么事情？
 答：很多吧，既然电脑设备文件、存储内容、网络等都可以用一个fd描述，那么就可以通过文件函数对其进行各种操作来对其进行修改控制，比如实现常见的文件操作，网络通信等。
 ### 4. 在你的终端执行命令 `ps`，你会看到你当前 bash 的 PID 号（第一行），记下这个 PID，然后再执行 `lsof -p ${PID}`，注意了，请把 ${PID} 替换成你看到的 PID。接下来你会看到 `lsof` 执行的输出结果。描述你看到的现象，你发现了什么？
-答：一个bash一个PID一个user，但是对应的FD有不一样的地方。
+答：
+进程名称      用户         类型  磁盘名称 大小      索引节点  文件名字
+
+
 COMMAND  PID USER   FD   TYPE DEVICE  SIZE/OFF     NODE NAME
+
+
 bash    8927  ypp  cwd    DIR  253,0        77 51290649 /home/ypp/Titans/003_copy/yu0206
+
+
 bash    8927  ypp  rtd    DIR  253,0       224       64 /
+
+
 bash    8927  ypp  txt    REG  253,0    964608 50346809 /usr/bin/bash
+
+
 bash    8927  ypp  mem    REG  253,0     61624   363681 /usr/lib64/libnss_files-2.17.so
+
+
 bash    8927  ypp  mem    REG  253,0 106075056   363642 /usr/lib/locale/locale-archive
+
+
 bash    8927  ypp  mem    REG  253,0   2151672   363663 /usr/lib64/libc-2.17.so
+
+
 bash    8927  ypp  mem    REG  253,0     19288   363669 /usr/lib64/libdl-2.17.so
+
+
 bash    8927  ypp  mem    REG  253,0    174576   156312 /usr/lib64/libtinfo.so.5.9
+
+
 bash    8927  ypp  mem    REG  253,0    163400    75703 /usr/lib64/ld-2.17.so
+
+
 bash    8927  ypp  mem    REG  253,0     26254 16878900 /usr/lib64/gconv/gconv-modules.cache
+
+
 bash    8927  ypp    0u   CHR  136,0       0t0        3 /dev/pts/0
+
+
 bash    8927  ypp    1u   CHR  136,0       0t0        3 /dev/pts/0
+
+
 bash    8927  ypp    2u   CHR  136,0       0t0        3 /dev/pts/0
+
+
 bash    8927  ypp  255u   CHR  136,0       0t0        3 /dev/pts/0
+
+
 
