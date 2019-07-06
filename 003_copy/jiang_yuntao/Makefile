@@ -1,6 +1,5 @@
 all: mycp
 	./mycp ../README.md file
-
 mycp: mycp.c
 	gcc -o $@ $<
 
