@@ -1,66 +1,44 @@
-1. block_io 为什么会阻塞？
-答：因为在 block_io 中，read函数和write函数在默认情况下是阻塞的。read函数在没有数据到达前时，会阻塞，一直等到数据到达。
+**1. block_io 为什么会阻塞？
 
-2. block_io_ex 为什么无法并发处理两个不同设备来的数据?
-答：在block_io_ex中，我们采用把两个不同的设备的文件描述符放入数组中，然后轮询之。问题在于，当前的设备数据一直没有到达，那么read函数会一直阻塞下去，直到当前设备数据到达。就算排在后面的设备的数据已经达到，也无法及时处理，导致了如今的现象。
+答：因为read函数在默认情况下是阻塞的。
 
-3. 查阅手册，fcntl 各个参数以及返回值的含义是什么？
-答： 头文件：
+**2. block_io_ex 为什么无法并发处理两个不同设备来的数据?
 
-#include <unistd.h>    
-#include <fcntl.h>
-定义函数：
+答：在block_io_ex中，我们把两个来自不同终端的字符放入数组中再处理，然而这时只要一方的输入没有到位，read就会陷入阻塞状态，无发继续。
 
-int fcntl(int fd, int cmd);
-int fcntl(int fd, int cmd, long arg);
-int fcntl(int fd, int cmd, struct flock * lock);
-函数说明：
+**3. 查阅手册，fcntl 各个参数以及返回值的含义是什么？
 
-1、fcntl()用来操作文件描述词的一些特性。
+答： 
+*1.参数cmd
+参数cmd代表打算操作的指令。
+有以下几种情况:
 
-2、参数fd 代表欲设置的文件描述词。
+F_DUPFD用来查找大于或等于参数arg的最小且仍未使用的文件描述符，并且复制参数fd的文件描述符。执行成功则返回新复制的文件描述符。新描述符与fd共享同一文件表项，但是新描述符有它自己的一套文件描述符标志，其中FD_CLOEXEC文件描述符标志被清除。请参考dup2()。
 
-3、参数cmd 代表欲操作的指令。有以下几种情况:
+F_GETFD取得close-on-exec旗标。若此旗标的FD_CLOEXEC位为0，代表在调用exec()相关函数时文件将不会关闭。
 
-F_DUPFD 用来查找大于或等于参数arg 的最小且仍未使用的文件描述词, 并且复制参数fd 的文件描述词. 执行成功则返回新复制的文件描述词. 请参考dup2(). F_GETFD 取得close-on-exec 旗标. 若此旗标的FD_CLOEXEC 位为0, 代表在调用exec()相关函数时文件将不会关闭.
+F_SETFD 设置close-on-exec 旗标。该旗标以参数arg 的FD_CLOEXEC位决定。
 
-F_SETFD 设置close-on-exec 旗标. 该旗标以参数arg 的FD_CLOEXEC 位决定.
+F_GETFL 取得文件描述符状态旗标，此旗标为open（）的参数flags。
 
-F_GETFL 取得文件描述词状态旗标, 此旗标为open()的参数flags.
+F_SETFL 设置文件描述符状态旗标，参数arg为新旗标，但只允许O_APPEND、O_NONBLOCK和O_ASYNC位的改变，其他位的改变将不受影响。
 
-F_SETFL 设置文件描述词状态旗标, 参数arg 为新旗标, 但只允许O_APPEND、O_NONBLOCK 和O_ASYNC 位的改变, 其他位的改变将不受影响.
+F_GETLK 取得文件锁定的状态。
 
-F_GETLK 取得文件锁定的状态.
+F_SETLK 设置文件锁定的状态。此时flcok 结构的l_type 值必须是F_RDLCK、F_WRLCK或F_UNLCK。如果无法建立锁定，则返回-1，错误代码为EACCES 或EAGAIN。
 
-F_SETLK 设置文件锁定的状态. 此时flcok 结构的l_type 值必须是F_RDLCK、F_WRLCK.
+F_SETLKW F_SETLK 作用相同，但是无法建立锁定时，此调用会一直等到锁定动作成功为止。若在等待锁定的过程中被信号中断时，会立即返回-1，错误代码为EINTR。
 
-F_UNLCK 如果无法建立锁定, 则返回-1, 错误代码为EACCES 或EAGAIN.
+*2.cntl的返回值与命令有关。
 
-F_SETLKW 同F_SETLK 作用相同, 但是无法建立锁定时, 此调用会一直等到锁定动作成功为止. 若在等待锁定的过程中被信号中断时, 会立即返回-1, 错误代码为EINTR. 参数lock 指针为flock 结构指针, 定义如下
+如果出错，所有命令都返回-1，如果成功则返回某个其他值。下列四个命令有特定返回值：F_DUPFD、F_GETFD、F_GETFL、F_GETOWN.第一个返回新的文件描述符，接下来的两个返回相应标志，最后一个返回一个正的进程ID或负的进程组ID。
 
-struct flcok
-{
-    short int l_type; //锁定的状态
-    short int l_whence; //决定l_start 位置
-    off_t l_start; //锁定区域的开头位置
-    off_t l_len; //锁定区域的大小
-    pid_t l_pid; //锁定动作的进程
-};
-/*
-l_type 有三种状态:
-    F_RDLCK 建立一个供读取用的锁定
-    F_WRLCK 建立一个供写入用的锁定
-    F_UNLCK 删除之前建立的锁定
+~~以上来自百度百科
 
-l_whence 也有三种方式:
-    SEEK_SET 以文件开头为锁定的起始位置.
-    SEEK_CUR 以目前文件读写位置为锁定的起始位置
-    SEEK_END 以文件结尾为锁定的起始位置.
-    */
-返回值：成功则返回0, 若有错误则返回-1, 错误原因存于errno.
+**4. 你觉得非阻塞 IO 解决了什么问题？
 
-4. 你觉得非阻塞 IO 解决了什么问题？
-答：我认为非阻塞 IO 解决了阻塞 IO 不能即使处理任一设备的数据到达这个问题。只要某设备数据到达，在下次轮询时就能得到处理，不受其他设备数据到达影响。
+答：我认为非阻塞 IO 除了解决阻塞 IO不能处理多设备同时进行的问题（实际上这个问题可以通过多线程解决），更重要的是能让read在有数据到达时就开始运作，而不是输入完后开始运作。
 
-5. nonblock_io 会有什么问题？
-答：我写的nonblock_io，cpu一直会轮询数组中的那些文件描述符。即使都没有数据到达，CPU也会一直空转下去，所以这个nonblock_io效率不高。
+**5. nonblock_io 会有什么问题？
+
+答：还是没有办法多线程处理问题，毕竟大多数时候我们并不是只做输入一件事情，而是同时做很多件事。
