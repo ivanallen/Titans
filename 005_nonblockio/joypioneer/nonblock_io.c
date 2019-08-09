@@ -1,5 +1,3 @@
-#define _POSIX_C_SOURCE 201906L
-
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
