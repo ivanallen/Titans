@@ -20,14 +20,14 @@ static char *upper(char* str, int len) {
 int main(int argc, char* argv[]) {
     if (argc < 2) return -1;
 
-    int i, openFileCnt = 0, fd[FILE_MAX];
+    int i, open_file_cnt = 0, fd[FILE_MAX];
     for (i = 0; i < FILE_MAX && i < argc - 1; i++) {
         fd[i] = open(argv[i + 1], O_RDONLY);
         if (fd[i] == -1) {
             perror("open");
             continue;
         }
-        openFileCnt ++;
+        open_file_cnt++;
     }    
     // cacheline 一般为 64 字节
     char buf[64] = { 0 };
@@ -45,13 +45,13 @@ int main(int argc, char* argv[]) {
                 printf("%d  EOF\n", i);
                 close(fd[i]);
                 fd[i] = -1;
-                openFileCnt --;
+                open_file_cnt--;
             } else {
                 printf("%d >>>> ", i);
                 write(STDOUT_FILENO, upper(buf, len), len);
             }
         }
-        if (openFileCnt == 0) break;
+        if (open_file_cnt == 0) break;
     }
     return 0;
 }
